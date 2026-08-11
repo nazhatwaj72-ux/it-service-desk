@@ -1,46 +1,55 @@
 # Full-Stack Ticket Management System
 
-A full-stack web application for managing support tickets through a React-based frontend, a Node.js/Express backend, and a MySQL database.
+A full-stack ticket management web application built with **React, Node.js, Express, and MySQL**. The application provides a structured interface for creating, viewing, updating, searching, filtering, and managing support tickets through a REST-style API.
 
-## Overview
+This project was developed as a portfolio project to demonstrate practical **full-stack web development**, including frontend development, backend API development, database integration, CRUD operations, reusable components, error handling, and Git/GitHub workflow.
 
-This project is a portfolio-oriented full-stack web application designed around a ticket management workflow. It provides a web interface for viewing ticket information, creating new tickets, editing existing tickets, viewing ticket details, and managing tickets through a structured frontend and backend architecture.
-
-The application is organized into separate frontend and backend projects:
-
-* **Frontend:** React application built with Vite
-* **Backend:** Node.js application using Express
-* **Database:** MySQL, accessed through the `mysql2` package
-* **API communication:** The frontend communicates with the backend through a dedicated ticket API module
-
-The project demonstrates practical full-stack development concepts including component-based UI development, client-side routing, REST-style backend architecture, database connectivity, CRUD-oriented application workflows, error handling, and environment-based database configuration.
-
-## The repository structure confirms separate `backend` and `frontend` applications, with dedicated controller, middleware, database configuration, API, component, and page layers.
+---
 
 ## Features
 
-Based on the implemented project structure, the application includes:
+### Ticket Management
 
+* Create new support tickets
+* View all tickets
+* View individual ticket details
+* Update existing tickets
+* Delete tickets
+* Display ticket status and priority using visual badges
+* Display requester, category, and creation date
+
+### Search & Filtering
+
+* Search tickets by title, description, or requester
+* Filter tickets by status
+* Filter tickets by priority
+* Filter tickets by category
+* Apply multiple filters together
+* Clear active filters
+* Search is performed when the user clicks the **Search** button or presses **Enter**
+
+### Dashboard
+
+* Total ticket count
+* Open tickets
+* In-progress tickets
+* Resolved tickets
+* Closed tickets
+* Recent ticket overview
+
+### User Interface
+
+* Responsive layout
 * Dashboard interface
-* Ticket listing
-* Ticket creation
-* Ticket details view
-* Ticket editing
-* Ticket form component
-* Ticket table component
-* Dedicated frontend ticket API module
-* Loading state handling
-* Error state handling
-* Empty state handling
-* Reusable application layout
-* Header and sidebar navigation
-* Client-side routing
-* Backend ticket controller
-* Centralized backend error-handling middleware
-* MySQL database connectivity
-* Environment-based database configuration
-
-The frontend contains dedicated pages for the dashboard, ticket list, ticket creation, ticket editing, and ticket details, together with reusable ticket and common UI components.
+* Sidebar navigation
+* Header navigation
+* Reusable React components
+* Loading states
+* Error states
+* Empty states
+* Responsive ticket tables
+* Ticket creation and editing forms
+* Ticket detail view
 
 ---
 
@@ -50,51 +59,43 @@ The frontend contains dedicated pages for the dashboard, ticket list, ticket cre
 
 * **React**
 * **JavaScript / JSX**
-* **React DOM**
 * **React Router**
 * **Vite**
-* **HTML**
-* **CSS**
-
-The project contains React application entry points, JSX components, React Router dependencies, and Vite tooling.
+* **HTML5**
+* **CSS3**
 
 ### Backend
 
 * **Node.js**
 * **Express.js**
 * **JavaScript**
-* **REST-style API architecture**
+* **REST-style API**
 * **CORS**
 * **dotenv**
 * **mysql2**
 
-The backend includes an Express server, controller layer, database configuration, error-handling middleware, and MySQL connectivity.
-
 ### Database
 
 * **MySQL**
-* **mysql2 Node.js driver**
-
-The database connection is configured through environment variables including host, user, password, database name, and port.
 
 ### Development Tools
 
 * **Git**
 * **GitHub**
 * **npm**
-* **Vite development server**
 * **Nodemon**
+* **Vite**
 
 ---
 
 ## Application Architecture
 
-The application follows a separated frontend/backend architecture:
+The application uses a separated frontend and backend architecture.
 
 ```mermaid
 flowchart LR
     A[React Frontend] --> B[Ticket API Module]
-    B --> C[Express Backend]
+    B --> C[Express REST API]
     C --> D[Ticket Controller]
     D --> E[MySQL Database]
 ```
@@ -102,28 +103,26 @@ flowchart LR
 ### Request Flow
 
 1. The user interacts with the React frontend.
-2. Frontend ticket operations are handled through `ticketApi.js`.
-3. Requests are sent to the Express backend.
-4. Backend logic is organized through the ticket controller.
-5. The backend communicates with MySQL through the database configuration.
-6. Errors are handled through dedicated backend middleware.
-7. Results are returned to the frontend and presented through the appropriate page or component.
+2. React pages and components handle the user interface.
+3. `ticketApi.js` manages communication with the backend API.
+4. Express receives the HTTP request.
+5. The ticket controller processes the requested operation.
+6. The backend communicates with MySQL.
+7. The API returns the result to the frontend.
+8. React updates the interface based on the response.
 
-This separation keeps frontend presentation and interaction logic distinct from backend/API and database responsibilities.
+This separation keeps presentation logic, API communication, backend logic, and database access organized independently.
 
 ---
 
 ## Project Structure
 
-The repository is divided into `backend` and `frontend` applications. The original project tree also contains installed `node_modules` directories; these generated dependency files are intentionally omitted from the documented structure below. The application source structure is represented here instead.
-
 ```text
 .
 ├── .gitignore
-├── tree.txt
 │
 ├── backend/
-│   ├── .env
+│   ├── .env.example
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── server.js
@@ -138,11 +137,11 @@ The repository is divided into `backend` and `frontend` applications. The origin
 │       └── errorHandler.js
 │
 └── frontend/
+    ├── .gitignore
     ├── .oxlintrc.json
     ├── index.html
     ├── package.json
     ├── package-lock.json
-    ├── README.md
     │
     ├── public/
     │   ├── favicon.svg
@@ -188,181 +187,308 @@ The repository is divided into `backend` and `frontend` applications. The origin
             └── global.css
 ```
 
-### Backend
+---
 
-| Directory/File                    | Purpose                                                |
-| --------------------------------- | ------------------------------------------------------ |
-| `server.js`                       | Backend application entry point                        |
-| `config/db.js`                    | Database configuration                                 |
-| `controllers/ticketController.js` | Ticket-related backend logic                           |
-| `middleware/errorHandler.js`      | Centralized backend error handling                     |
-| `.env`                            | Local database configuration and environment variables |
-| `package.json`                    | Backend dependencies and scripts                       |
+## Backend Structure
 
-### Frontend
+| File                              | Purpose                                                  |
+| --------------------------------- | -------------------------------------------------------- |
+| `server.js`                       | Express application entry point and server configuration |
+| `config/db.js`                    | MySQL database connection configuration                  |
+| `controllers/ticketController.js` | Ticket CRUD, search, filtering, and statistics logic     |
+| `middleware/errorHandler.js`      | Centralized backend error handling                       |
+| `.env.example`                    | Example database environment configuration               |
 
-| Directory/File            | Purpose                                             |
+---
+
+## Frontend Structure
+
+| File / Directory          | Purpose                                             |
 | ------------------------- | --------------------------------------------------- |
 | `src/main.jsx`            | React application entry point                       |
-| `src/App.jsx`             | Main application component                          |
-| `src/api/ticketApi.js`    | Frontend ticket API communication                   |
-| `src/components/common/`  | Reusable loading, error, and empty-state components |
-| `src/components/layout/`  | Shared application layout, header, and sidebar      |
-| `src/components/tickets/` | Reusable ticket-related UI components               |
+| `src/App.jsx`             | Main application and route configuration            |
+| `src/api/ticketApi.js`    | Handles communication with the ticket API           |
 | `src/pages/`              | Application pages                                   |
-| `src/styles/`             | Global styling                                      |
+| `src/components/common/`  | Reusable loading, error, and empty-state components |
+| `src/components/layout/`  | Header, sidebar, and application layout             |
+| `src/components/tickets/` | Reusable ticket-related components                  |
+| `src/styles/`             | Global application styling                          |
 | `src/assets/`             | Frontend assets                                     |
+
+---
+
+## REST API
+
+The backend provides a ticket-oriented REST API.
+
+### Tickets
+
+| Method   | Endpoint             | Description                |
+| -------- | -------------------- | -------------------------- |
+| `GET`    | `/api/tickets`       | Retrieve tickets           |
+| `GET`    | `/api/tickets/:id`   | Retrieve a specific ticket |
+| `POST`   | `/api/tickets`       | Create a new ticket        |
+| `PUT`    | `/api/tickets/:id`   | Update a ticket            |
+| `DELETE` | `/api/tickets/:id`   | Delete a ticket            |
+| `GET`    | `/api/tickets/stats` | Retrieve ticket statistics |
+
+### Search and Filtering
+
+The ticket listing endpoint supports query parameters for filtering and searching.
+
+Example:
+
+```text
+GET /api/tickets?status=Open
+```
+
+Multiple filters can be combined:
+
+```text
+GET /api/tickets?status=Open&priority=High&category=Network
+```
+
+Search can also be performed:
+
+```text
+GET /api/tickets?search=printer
+```
+
+The frontend builds these query parameters through the dedicated API module:
+
+```text
+frontend/src/api/ticketApi.js
+```
+
+---
+
+## Database
+
+The application uses **MySQL** for persistent ticket storage.
+
+The backend uses the `mysql2` package to communicate with the database.
+
+Database configuration is provided through environment variables.
+
+```env
+DB_HOST=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+DB_PORT=
+```
+
+### Environment Variables
+
+| Variable      | Description           |
+| ------------- | --------------------- |
+| `DB_HOST`     | MySQL server hostname |
+| `DB_USER`     | MySQL username        |
+| `DB_PASSWORD` | MySQL password        |
+| `DB_NAME`     | Database name         |
+| `DB_PORT`     | MySQL server port     |
 
 ---
 
 ## Prerequisites
 
-Before running the application locally, install:
+Before running the project locally, install:
 
 * **Node.js**
 * **npm**
 * **MySQL Server**
 * **Git**
 
-## The project uses separate npm projects for the backend and frontend, each with its own `package.json` and `package-lock.json`.
+---
 
 ## Installation
 
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/nazhatwaj72-ux/it-service-desk.git
+cd it-service-desk
 ```
 
 ---
 
-### 2. Backend Setup
+### 2. Configure the Database
 
-Navigate to the backend directory:
+Create a MySQL database for the application.
+
+Then configure the backend environment variables.
+
+Navigate to the backend:
 
 ```bash
 cd backend
 ```
 
-Install dependencies:
+Create a `.env` file:
+
+```env
+DB_HOST=localhost
+DB_USER=your_mysql_user
+DB_PASSWORD=your_mysql_password
+DB_NAME=your_database_name
+DB_PORT=3306
+```
+
+Use your actual local MySQL credentials.
+
+**Do not commit `.env` to GitHub.**
+
+---
+
+### 3. Install Backend Dependencies
+
+From the `backend` directory:
 
 ```bash
 npm install
 ```
 
-The backend has its own dependency manifest and lock file.
-
 ---
 
-### 3. Database Setup
+### 4. Install Frontend Dependencies
 
-The backend uses MySQL through the `mysql2` package.
-
-Create the required MySQL database and configure the connection using the environment variables described below.
-
-> **Note:** No SQL schema or database initialization file is present in the supplied project structure. Therefore, the exact database schema and initialization commands cannot be documented from the repository tree alone.
-
----
-
-### 4. Environment Variables
-
-Create or configure the backend `.env` file with your local database configuration:
-
-```env
-DB_HOST=
-DB_USER=
-DB_PASSWORD=
-DB_NAME=
-DB_PORT=
-```
-
-These values should correspond to your local MySQL installation.
-
-**Never commit `.env` files containing credentials or other sensitive configuration to GitHub.**
-
-A safer repository practice is to provide an `.env.example` file containing only variable names and placeholder values:
-
-```env
-DB_HOST=
-DB_USER=
-DB_PASSWORD=
-DB_NAME=
-DB_PORT=
-```
-
-Keep the actual `.env` file local and ensure it is excluded through `.gitignore`.
-
----
-
-### 5. Frontend Setup
-
-From the project root, navigate to the frontend directory:
+Open another terminal and navigate to the frontend:
 
 ```bash
 cd frontend
-```
-
-Install dependencies:
-
-```bash
 npm install
 ```
-
-The frontend is a Vite-based React application with its own npm configuration.
 
 ---
 
 ## Running the Application
 
-The frontend and backend should be started separately during local development.
+The frontend and backend run separately during development.
 
 ### Start the Backend
 
-Open a terminal:
+From the `backend` directory:
 
 ```bash
-cd backend
 npm start
 ```
 
-If the backend's package scripts use a different development command, use the script defined in `backend/package.json`.
+If the project provides a development script using Nodemon, it can be started using the corresponding script from `package.json`.
 
 ### Start the Frontend
 
-Open a second terminal:
+From the `frontend` directory:
 
 ```bash
-cd frontend
 npm run dev
 ```
 
-Vite provides the frontend development server.
-
-The exact backend port and frontend development URL should be taken from the project's actual runtime configuration rather than assumed from the directory structure.
+Vite will provide the local development address in the terminal.
 
 ---
 
-## API Documentation
+## Search & Filtering Workflow
 
-The project contains a dedicated backend ticket controller and a frontend `ticketApi.js` module, indicating a ticket-oriented API layer.
-However, the supplied `tree /F` output identifies files and directories but does not contain the source code inside those files. Therefore, the exact HTTP methods, endpoint paths, request bodies, query parameters, and response structures cannot be reliably documented without inspecting the implementation.
+The ticket list provides a manual search and filtering workflow.
 
-To avoid inventing API contracts, endpoint details are intentionally omitted from this README until the backend route definitions are available.
+### Search
+
+Enter a search term in the search field and click **Search**.
+
+The search can target:
+
+* Ticket title
+* Ticket description
+* Requester
+
+The search can also be submitted by pressing **Enter**.
+
+### Filters
+
+Tickets can be filtered using:
+
+* Status
+* Priority
+* Category
+
+Multiple filters can be combined.
+
+### Clear Filters
+
+The **Clear Filters** button resets all active search and filter criteria.
 
 ---
 
-## Database
+## Error Handling
 
-### Database Technology
+The application includes error-handling mechanisms on both the frontend and backend.
 
-**MySQL**
+### Frontend
 
-The backend includes a dedicated database configuration module and the `mysql2` dependency.
+Reusable components handle:
 
-### Configuration
+* Loading states
+* API errors
+* Empty results
+* Failed requests
 
-Database connectivity is configured through:
+### Backend
+
+The backend uses centralized error-handling middleware:
+
+```text
+backend/middleware/errorHandler.js
+```
+
+This provides a consistent mechanism for handling server-side errors.
+
+---
+
+## Responsive Design
+
+The frontend is designed to work across different screen sizes.
+
+Responsive behavior includes:
+
+* Mobile navigation
+* Responsive sidebar
+* Responsive ticket tables
+* Mobile-friendly forms
+* Responsive dashboard cards
+* Flexible page layouts
+
+The interface adapts between desktop and smaller mobile screen sizes using CSS media queries.
+
+---
+
+## Security & Development Practices
+
+The project follows several practical development practices:
+
+* Environment variables for database credentials
+* `.gitignore` configuration for sensitive/local files
+* Separation of frontend and backend responsibilities
+* Centralized backend error handling
+* Dedicated database configuration
+* Dedicated API communication module
+* Reusable React components
+* Separation of pages, components, and API logic
+* Input handling and validation through the ticket forms
+* Git-based version control
+
+### Environment Security
+
+The actual `.env` file should remain local.
+
+The repository should contain:
+
+```text
+.env.example
+```
+
+rather than credentials.
+
+Example:
 
 ```env
 DB_HOST=
@@ -372,127 +498,98 @@ DB_NAME=
 DB_PORT=
 ```
 
-The supplied project structure does not include a SQL schema or migration directory, so the exact table names, columns, indexes, and relationships are not documented here.
-
----
-
-## Search and Filtering
-
-The supplied project structure confirms a ticket list page and ticket table component:
-
-```text
-TicketListPage.jsx
-TicketTable.jsx
-```
-
-However, the presence of these files alone does not establish that search or filtering functionality is implemented.
-
-Therefore, specific search or filtering capabilities are not claimed in this README without confirmation from the application source code.
+Never commit real database passwords or other sensitive credentials.
 
 ---
 
 ## Screenshots
 
-Screenshots were not included in the supplied project structure.
+Screenshots can be added to document the main application interfaces.
 
-When screenshots are added to the repository, they can be documented here, for example:
-
-```markdown
 ## Screenshots
 
 ### Dashboard
+
+The dashboard provides an overview of ticket statistics and recently created tickets.
+
 ![Dashboard](docs/screenshots/dashboard.png)
 
 ### Ticket List
+
+The ticket list provides searchable and filterable access to support tickets by status, priority, category, and search terms.
+
 ![Ticket List](docs/screenshots/ticket-list.png)
 
+### Create Ticket
+
+The ticket creation interface allows users to submit new support tickets with the required metadata.
+
+![Create Ticket](docs/screenshots/create-ticket.png)
+
 ### Ticket Details
+
+The ticket details page displays the complete information for an individual ticket and provides actions for managing it.
+
 ![Ticket Details](docs/screenshots/ticket-details.png)
-```
-
-Do not add these image references until the corresponding files actually exist in the repository.
-
 ---
 
-## Security and Development Practices
+## Skills Demonstrated
 
-The project demonstrates several development practices that can be confirmed from its structure:
+This project demonstrates practical experience with:
 
-* **Environment-based database configuration** through `.env` variables.
-* **Separation of frontend and backend applications.**
-* **Dedicated database configuration module.**
-* **Dedicated controller layer for ticket operations.**
-* **Centralized backend error-handling middleware.**
-* **Dedicated frontend API module for ticket communication.**
-* **Reusable React components for common UI states.**
-* **Component-based frontend organization.**
-* **Git repository management through `.gitignore`.**
-
-The repository includes `errorHandler.js`, `db.js`, `ticketController.js`, and `ticketApi.js` as separate modules rather than placing all application logic in a single file.
-
-### Environment Security
-
-Database credentials should remain outside source control.
-
-Do not commit:
-
-```text
-.env
-```
-
-Do commit, if desired:
-
-```text
-.env.example
-```
-
-with placeholder values only.
+* React
+* JavaScript / JSX
+* React Router
+* Vite
+* HTML5
+* CSS3
+* Node.js
+* Express.js
+* REST APIs
+* MySQL
+* Database integration
+* CRUD operations
+* API integration
+* Search and filtering
+* Error handling
+* Responsive web design
+* Component-based architecture
+* Separation of concerns
+* Environment configuration
+* Git and GitHub
 
 ---
 
 ## Future Improvements
 
-The following are potential improvements and are **not presented as currently implemented features**:
+Potential future improvements include:
 
-* Authentication and authorization
+* User authentication
 * Role-based access control
-* Ticket assignment to specific users
-* Pagination for large ticket datasets
-* More advanced search and filtering
+* Ticket assignment
+* Pagination
+* Advanced ticket sorting
 * Automated unit and integration testing
-* API documentation with OpenAPI/Swagger
-* Request validation with a dedicated validation library
-* Structured application logging
-* Production deployment
-* CI/CD pipeline
-* Containerization with Docker
+* API documentation using OpenAPI/Swagger
 * Database migrations and seed scripts
-* Production monitoring and observability
+* Docker containerization
+* CI/CD pipeline
+* Cloud deployment
+* Production monitoring and logging
+
+These are planned extensions and are not represented as currently implemented features.
 
 ---
 
-## Learning / Technical Highlights
+## Portfolio Purpose
 
-This project demonstrates practical experience with:
+This project was developed as a practical portfolio application to demonstrate the ability to build and connect the major layers of a full-stack web application.
 
-* **React frontend development**
-* **Component-based UI architecture**
-* **React Router**
-* **Reusable React components**
-* **Frontend API integration**
-* **Node.js backend development**
-* **Express.js**
-* **REST-style API architecture**
-* **MySQL database integration**
-* **CRUD-oriented application workflows**
-* **Separation of concerns**
-* **Backend controller architecture**
-* **Error handling**
-* **Environment-based configuration**
-* **npm dependency management**
-* **Git/GitHub project organization**
+It demonstrates the complete workflow from:
 
-The project is particularly relevant as a portfolio piece because it demonstrates the connection between the major layers of a full-stack application rather than focusing exclusively on frontend or backend development.
+**React UI → API communication → Express backend → MySQL database**
+
+while incorporating practical features such as CRUD operations, search and filtering, dashboard statistics, reusable components, responsive design, and error handling.
 
 ---
 
@@ -500,5 +597,8 @@ The project is particularly relevant as a portfolio piece because it demonstrate
 
 **Nazhatullah Wajdi**
 
-* GitHub: https://github.com/nazhatwaj72-ux
-* LinkedIn: https://www.linkedin.com/in/nazhatullah-wajdi-218729379/
+**GitHub:**
+https://github.com/nazhatwaj72-ux
+
+**LinkedIn:**
+https://www.linkedin.com/in/nazhatullah-wajdi-218729379/
