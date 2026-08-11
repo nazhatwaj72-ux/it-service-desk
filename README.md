@@ -1,4 +1,4 @@
-# Full-Stack Ticket Management System
+# Full-Stack IT Ticket Management System
 
 A full-stack ticket management web application built with **React, Node.js, Express, and MySQL**. The application provides a structured interface for creating, viewing, updating, searching, filtering, and managing support tickets through a REST-style API.
 
