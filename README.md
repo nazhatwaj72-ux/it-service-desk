@@ -504,10 +504,6 @@ Never commit real database passwords or other sensitive credentials.
 
 ## Screenshots
 
-Screenshots can be added to document the main application interfaces.
-
-## Screenshots
-
 ### Dashboard
 
 The dashboard provides an overview of ticket statistics and recently created tickets.
