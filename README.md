@@ -512,25 +512,26 @@ Screenshots can be added to document the main application interfaces.
 
 The dashboard provides an overview of ticket statistics and recently created tickets.
 
-![Dashboard](docs/screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard.png)
 
 ### Ticket List
 
 The ticket list provides searchable and filterable access to support tickets by status, priority, category, and search terms.
 
-![Ticket List](docs/screenshots/ticket-list.png)
+![Ticket List](screenshots/ticket-list.png)
 
 ### Create Ticket
 
 The ticket creation interface allows users to submit new support tickets with the required metadata.
 
-![Create Ticket](docs/screenshots/create-ticket.png)
+![Create Ticket](screenshots/create-ticket.png)
 
 ### Ticket Details
 
 The ticket details page displays the complete information for an individual ticket and provides actions for managing it.
 
-![Ticket Details](docs/screenshots/ticket-details.png)
+![Ticket Details](screenshots/ticket-details.png)
+
 ---
 
 ## Skills Demonstrated
